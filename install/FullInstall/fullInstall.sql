@@ -888,7 +888,7 @@ CHANGE `type` `type` SET(
 	'DonatorAdamantium', 'DonatorService', 'DonatorOwner', 'Bot'
 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'User';
 
-ALTER TABLE `wD_Members` MODIFY `votes` set('Draw','Pause','Cancel','Concede');
+ALTER TABLE `wD_Members` CHANGE `votes` `votes` set('Draw','Pause','Cancel','Concede') NOT NULL DEFAULT '';
 
 UPDATE `wD_Misc` SET `value` = '161' WHERE `name` = 'Version';
 

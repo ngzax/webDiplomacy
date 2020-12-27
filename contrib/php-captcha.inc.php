@@ -52,8 +52,8 @@ putenv('GDFONTPATH=' . realpath('.'));
    
    // start a PHP session - this class uses sessions to store the generated 
    // code. Comment out if you are calling already from your application
-	session_name('easyCaptcha');
-   session_start(); 
+   // session_name('easyCaptcha');
+   // session_start(); 
    
    // class defaults - change to effect globally
    
@@ -71,7 +71,7 @@ putenv('GDFONTPATH=' . realpath('.'));
    define('CAPTCHA_MAX_FONT_SIZE', 25);
    define('CAPTCHA_USE_COLOUR', false);
    define('CAPTCHA_FILE_TYPE', 'jpeg');
-   define('CAPTCHA_FLITE_PATH', '/usr/bin/flite');
+   define('CAPTCHA_FLITE_PATH', '/usr/local/bin/flite');
    define('CAPTCHA_AUDIO_PATH', '/tmp/'); // must be writeable by PHP process
    
    /************************ End Default Options **********************/
@@ -102,7 +102,7 @@ putenv('GDFONTPATH=' . realpath('.'));
       var $sFileType;
       var $sCode = '';
       
-      function PhpCaptcha(
+      function __construct(
          $aFonts, // array of TrueType fonts to use - specify full path
          $iWidth = CAPTCHA_WIDTH, // width of image
          $iHeight = CAPTCHA_HEIGHT // height of image

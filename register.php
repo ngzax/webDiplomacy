@@ -61,7 +61,7 @@ if ( isset($_COOKIE['imageToken']) && isset($_REQUEST['imageText']) && isset($_R
 
 		list($Hash, $Time) = $imageToken;
 
-		if ( md5(Config::$secret.$_REQUEST['imageText'].$_SERVER['REMOTE_ADDR'].$Time) != $Hash )
+		if ( md5(Config::$secret.$_REQUEST['imageText'].$Time) != $Hash )
 		{
 			throw new Exception(l_t("An invalid anti-script code was given, please try again"));
 		}
