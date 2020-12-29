@@ -691,7 +691,17 @@ class User {
 		$this->notifications->$notification = true;
 		if ($this->notifications->updated)
 		{
-			$DB->sql_put("UPDATE wD_Users SET notifications = CONCAT_WS(',',notifications,'".$notification."') WHERE id = ".$this->id);
+			$DB->sql_put("UPDATE wD_Users AS u 
+				      LEFT JOIN 
+                                        (SELECT id, notifications FROM wd_users WHERE notifications <> '' AND notifications <> '" . $notification . "') 
+					AS n 
+					ON 
+                                          n.id = u.id 
+				      SET 
+                                        u.notifications = CONCAT_WS(',' , n.notifications, '" . $notification . "') 
+				      WHERE 
+					u.id = " . $this->id);
+
 			$this->notifications->updated = false;
 		}
 	}
