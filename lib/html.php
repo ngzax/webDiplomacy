@@ -879,11 +879,10 @@ class libHTML
 	 	$menu = '<!-- Menu begin. -->
 				<div id="header">
 					<div id="header-container">
-						<a href="./">
-							<img id="urbit_logo" src="' . l_s('images/urbit-logo-medium.png') . '" alt="Urbit" style="height: 53px; width: auto;" />
-							<img id="logo" src="' . l_s('images/logo.png') . '" alt="'. l_t('webDiplomacy') . '" />
+						<a id="logo" href="./">
+							<img src="images/logo.png" alt="webDiplomacy" />
+							<img src="images/urbit-logo-medium.png" alt="Urbit" style="height: 53px; width: auto;" />
 						</a>';
-
 
 		if ( is_object( $User ) )
 		{
