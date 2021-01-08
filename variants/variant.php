@@ -154,7 +154,7 @@ abstract class WDVariant {
 	public function __call($name, $args) {
 
 		$name = l_vc($name);
-		
+
 		if( isset($this->variantClasses[$name]) )
 			$classname=$this->variantClasses[$name].'Variant_'.$name;
 		else
@@ -275,36 +275,32 @@ abstract class WDVariant {
 	 * @var string
 	 */
 	private $deCoastSelectCache;
+
 	/**
 	 * Generate the SQL to make a terrID column being selected non-coastal
 	 *
 	 * @param string $column The name of the column to deCoast
 	 * @return string
 	 */
-	public function deCoastSelect($column)
-	{
-		if( !is_array($this->coastChildIDsByParentID) )
-		{
+	public function deCoastSelect($column) {
+		if( !is_array($this->coastChildIDsByParentID) ) {
 			return $column;
 		}
 
-		if( !isset($this->deCoastSelectCache) )
-		{
-			$sql = '%COL%';
-
-			foreach( $this->coastChildIDsByParentID as $parentID=>$childIDs)
-			{
-				$where=array();
+		if( !isset($this->deCoastSelectCache) ) {
+			$whenSQL = '';
+			foreach( $this->coastChildIDsByParentID as $parentID=>$childIDs) {
+				$where = array();
 				foreach($childIDs as $childID)
-					$where[]='%COL%='.$childID;
-
-				$sql = 'IF('.implode(' OR ',$where).','.$parentID.','.$sql.')';
+					$where[] = '%COL% = ' . $childID;
+				$whenSQL = 'WHEN (' . implode(' OR ', $where) . ') THEN ' . $parentID;
 			}
 
+	    $sql = 'CASE ' . $whenSQL . ' ELSE %COL% END';
 			$this->deCoastSelectCache = $sql;
 		}
 
-		return str_replace('%COL%',$column,$this->deCoastSelectCache);
+		return str_replace('%COL%', $column, $this->deCoastSelectCache);
 	}
 
 	/**

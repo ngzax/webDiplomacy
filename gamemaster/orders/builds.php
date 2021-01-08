@@ -52,16 +52,22 @@ class processOrderBuilds extends processOrder
 	/**
 	 * Convert orders to moves to be adjudicated
 	 */
-	public function toMoves()
-	{
+	public function toMoves() {
 		global $DB, $Game;
-
 		// Insert all the needed info into the moves table, stripping off the coasts data, which the adjudicator doesn't deal with
-		$DB->sql_put("INSERT INTO wD_Moves
-			( gameID, orderID, unitID, countryID, moveType, toTerrID )
-			SELECT gameID, id, 0, countryID, type,  ".$Game->Variant->deCoastSelect('toTerrID')." as toTerrID
-			FROM wD_Orders
-			WHERE gameID = ".$Game->id);
+		$DB->sql_put("INSERT INTO wD_Moves(gameID, orderID, unitID, countryID, moveType, terrID, toTerrID)
+			              SELECT
+										  gameID,
+											id,
+											0,
+											0,
+											countryID,
+											type,
+											{$Game->Variant->deCoastSelect('toTerrID')} as toTerrID
+			              FROM
+										  wD_Orders
+			              WHERE
+										  gameID = {$Game->id};");
 	}
 
 	/**
