@@ -873,15 +873,15 @@ class libHTML
 	 *
 	 * @return string The logo, welcome text and menu HTML
 	 */
-	static public function menu ($pages, $scriptname)
-	{
+	static public function menu ($pages, $scriptname) {
 		global $User;
 
 	 	$menu = '<!-- Menu begin. -->
 				<div id="header">
 					<div id="header-container">
 						<a href="./">
-							<img id="logo" src="'.l_s('images/logo.png').'" alt="'.l_t('webDiplomacy').'" />
+							<img id="urbit_logo" src="' . l_s('images/urbit-logo-medium.png') . '" alt="Urbit" style="height: 53px; width: auto;" />
+							<img id="logo" src="' . l_s('images/logo.png') . '" alt="'. l_t('webDiplomacy') . '" />
 						</a>';
 
 
