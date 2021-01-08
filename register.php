@@ -161,15 +161,21 @@ switch($page)
 	case 'emailTokenFailed':
 	case 'firstUserForm':
 	case 'userForm':
-		print libHTML::pageTitle(l_t('Register a webDiplomacy account'),l_t('Validate your email address -&gt; <strong>Enter your account settings</strong> -&gt; Play webDiplomacy!'));
+		print libHTML::pageTitle(
+			l_t('Register a Urbit/webDiplomacy account'),
+		  l_t('Validate your email address -&gt; <strong>Enter your account settings</strong> -&gt; Play webDiplomacy!')
+		);
 }
 
 switch($page)
 {
 	case 'firstValidationForm':
 
-		print '<h2>'.l_t('Welcome to webDiplomacy!').'</h2>';
-		print '<p>'.l_t('We are a competitive community looking for fair and fun games; to ensure you are a human with a working email address, please fill out the registration form below. Help us keep the server free of spam and cheaters!').'</p>';
+		print '<h2>' . l_t('Welcome to webDiplomacy, Martian edition!') . '</h2>';
+		print '<p>' . l_t(
+			'We are a competitive community looking for fair and fun games;' .
+		  'to ensure you are a martian with a working pier and valid email address, please fill out the registration form below.' .
+			'For your user name, please use your full planet @p including the ~. Please no moons or comets.') . '</p>';
 
 		print '<h2>'.l_t('Site User Agreement (We aren’t Apple™, so please read this.)').'</h2>';
 		print '<p>'.l_t('I agree not to create more than one account.<br /> '.
@@ -179,7 +185,7 @@ switch($page)
 		'I agree to treat all members with respect regardless of race, religion, gender, or creed.<br /><br /> '.
 
 		'If you can agree to these values and adhere to our site rules, you are welcome here!').'</p>';
-		
+
 	case 'validationForm':
 
 		require_once(l_r('locales/English/validationForm.php'));
@@ -218,7 +224,7 @@ switch($page)
 
 		print "<p>".l_t("Thank you for verifying your email address!</p>
 			<p>Enter the username, password, and any of the optional settings you want into the screen below to
-			complete the registration process.")." </br></br><font color='red'>Your username is visible to other members and cannot be changed, so please make sure you're sure about it. Keep it appropriate and 
+			complete the registration process.")." </br></br><font color='red'>Your username is visible to other members and cannot be changed, so please make sure you're sure about it. Keep it appropriate and
 			and avoid using your full name if you are concerned about privacy.</font></p>";
 
 	case 'userForm':
