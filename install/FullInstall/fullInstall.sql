@@ -344,6 +344,7 @@ CREATE TABLE `wD_ModeratorNotes` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
+
 CREATE TABLE `wD_Moves` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `gameID` mediumint(8) unsigned NOT NULL,
@@ -351,7 +352,7 @@ CREATE TABLE `wD_Moves` (
   `unitID` int(10) unsigned NOT NULL,
   `countryID` tinyint(3) unsigned NOT NULL,
   `moveType` enum('Hold','Move','Support hold','Support move','Convoy','Retreat','Disband','Build Army','Build Fleet','Wait','Destroy') NOT NULL,
-  `terrID` smallint(5) unsigned NOT NULL,
+  `terrID` smallint(5) unsigned DEFAULT NULL,
   `toTerrID` smallint(5) unsigned DEFAULT NULL,
   `fromTerrID` smallint(5) unsigned DEFAULT NULL,
   `viaConvoy` enum('No','Yes') NOT NULL DEFAULT 'No',
@@ -363,6 +364,7 @@ CREATE TABLE `wD_Moves` (
   KEY `orderID` (`orderID`),
   KEY `gameID` (`gameID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -781,7 +783,7 @@ ALTER TABLE `wD_Backup_Games` MODIFY `minimumBet` MEDIUMINT(8);
 
 UPDATE `wD_Misc` SET `value` = '153' WHERE `name` = 'Version';
 
-ALTER TABLE `wD_Users` ADD `tempBanReason` text;   
+ALTER TABLE `wD_Users` ADD `tempBanReason` text;
 
 UPDATE `wD_Misc` SET `value` = '154' WHERE `name` = 'Version';
 
@@ -790,7 +792,7 @@ CREATE TABLE `wD_Tournaments` (
 `name` VARCHAR( 150 ) NOT NULL,
 `description` TEXT,
 `status` enum('PreStart','Registration','Active', 'Finished') NOT NULL,
-`minRR` tinyint (3) unsigned, 
+`minRR` tinyint (3) unsigned,
 `year` SMALLINT(4) unsigned,
 `totalRounds` tinyint(3) unsigned,
 `forumThreadLink` VARCHAR(150),
@@ -853,7 +855,7 @@ CREATE TABLE `wD_ApiPermissions` (
 );
 ALTER TABLE `wD_ApiPermissions` ADD CONSTRAINT `wD_ApiPermissions_pk` PRIMARY KEY (`userID`);
 
-ALTER TABLE `wD_MissedTurns` ADD `liveGame` BOOLEAN DEFAULT 0;  
+ALTER TABLE `wD_MissedTurns` ADD `liveGame` BOOLEAN DEFAULT 0;
 
 update wD_MissedTurns m inner join wD_Games g on g.id = m.gameID set m.liveGame = 1 where g.phaseMinutes < 61 and g.id is not null;
 
